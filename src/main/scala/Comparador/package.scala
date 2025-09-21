@@ -25,10 +25,6 @@ package object Comparador {
         if (lUnorder.isEmpty) (lOrder, totalOps)
         else {
           val insertStep = insert(lUnorder.head, lOrder, comp)
-          print("Insertando: ")
-          println(lUnorder.head)
-          print("Se usaron: ")
-          println(insertStep._2)
           insertionSortIter(insertStep._1, lUnorder.tail, insertStep._2 + totalOps)
         }
       }
@@ -37,6 +33,13 @@ package object Comparador {
 
     insertionSortInstance
     }
+
+  def comparar[T](a1:AlgoritmoOrd[T], a2:AlgoritmoOrd[T], l:List[T]):(Int, Int) = {
+    val (l1, c1) = a1(l)
+    val (l2, c2) = a2(l)
+
+    if(l1==l2) (c1,c2) else (-1,-1)
+  }
 
 
 }

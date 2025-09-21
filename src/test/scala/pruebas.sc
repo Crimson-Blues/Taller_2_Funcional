@@ -1,4 +1,14 @@
 import Comparador ._
+import scala.util.Random
+
+val random = new Random()
+
+def randomList(long:Int): List[Int] ={
+  val v = Vector.fill(long){
+    random.nextInt(long*2)+1
+  }
+  v.toList
+}
 
 def menorQue(a:Int, b:Int): Boolean = a < b
 
