@@ -11,28 +11,28 @@ package object Comparador {
       if (right.isEmpty) (left ++ List(e), ops)
       else {
         if (comp(e, right.head)) (left ++ (e :: right), ops + 1)
-        else insertIter(left ++ List(right.head), right.tail, ops + 1)
+          else insertIter(left ++ List(right.head), right.tail, ops + 1)
       }
     }
 
     insertIter(List(), l, 0)
   }
 
+
   def insertionSort[T](comp:Comparador[T]): AlgoritmoOrd[T] = {
-    def insertionSortInstance (l: List[T]): (List[T], Int) = {
-      @tailrec
-      def insertionSortIter(lOrder:List[T], lUnorder:List[T], totalOps:Int): (List[T], Int) = {
-        if (lUnorder.isEmpty) (lOrder, totalOps)
-        else {
-          val insertStep = insert(lUnorder.head, lOrder, comp)
-          insertionSortIter(insertStep._1, lUnorder.tail, insertStep._2 + totalOps)
-        }
+    def insertionSortInstance(l: List[T]): (List[T], Int) = {
+      if (l.isEmpty) (l, 0)
+      else {
+        val (sortedTail, opsTail) = insertionSortInstance(l.tail)
+        val (listStep, numOps) = insert(l.head, sortedTail, comp)
+
+        (listStep, numOps + opsTail)
       }
-      insertionSortIter(List(l.head), l.tail, 0)
-      }
+    }
 
     insertionSortInstance
     }
+
 
   def menoresQue_noMenoresQue[T](l: List[T], v: T, comp: Comparador[T]): (List[T], List[T], Int) = {
     @tailrec
