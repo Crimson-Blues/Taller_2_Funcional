@@ -18,7 +18,7 @@ package object Comparador {
     insertIter(List(), l, 0)
   }
 
-
+  
   def insertionSort[T](comp:Comparador[T]): AlgoritmoOrd[T] = {
     def insertionSortInstance(l: List[T]): (List[T], Int) = {
       if (l.isEmpty) (l, 0)
